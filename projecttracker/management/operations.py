@@ -17,3 +17,11 @@ class Operations:
         print(f"Task '{new_task.taskID}' added.")
         return new_task
     
+
+class Project(Operations):
+
+
+
+
+
+class Task(Project):
