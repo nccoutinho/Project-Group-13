@@ -30,3 +30,6 @@ def get_deadline_input():
     
 def get_owner_input():
     return input('Enter owner:')
+    
+def get_project_task_id():
+    return input('Enter project or task ID:').upper()
