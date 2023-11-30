@@ -16,6 +16,29 @@ class Operations:
         self.tasks[new_task.taskID] = new_task
         print(f"Task '{new_task.taskID}' added.")
         return new_task
+    
+    def delete_item(self):
+        delete_type = input("Enter 'project' or 'task' ID to delete: ").upper()
+        
+        if delete_type[0] == 'P':
+            if delete_type in self.projects:
+                del_proj = self.projects.pop(delete_type)
+                print(f"Project '{delete_type}' deleted.")
+                return del_proj
+            else:
+                print(f"Project '{delete_type}' not found.")
+                return None
+        elif delete_type[0] == 'T':
+            if delete_type in self.tasks:
+                del_task = self.tasks.pop(delete_type)
+                print(f"Task '{delete_type}' deleted.")
+                return del_task
+            else:
+                print(f"Task '{delete_type}' not found.")
+                return None
+        else:
+            print("Invalid input. Please enter 'project' or 'task'.")
+            return None
 
 class Project(Operations):
     project_counter = 0
@@ -35,7 +58,8 @@ class Project(Operations):
 
 class Task(Project):
     task_counter = 0
-    def __init__(self, Name, Priority, Duration, Comments, assignedTo, startDate, Deadline):
+    def __init__(self, projectID, Name, Priority, Duration, Comments, assignedTo, startDate, Deadline):
+        self.projectID = projectID
         Task.task_counter += 1
         self.taskID = f'T{Task.task_counter:04}'
         self.taskName = Name
