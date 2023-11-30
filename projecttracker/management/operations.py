@@ -17,6 +17,44 @@ class Operations:
         print(f"Task '{new_task.taskID}' added.")
         return new_task
     
+    def modify_item(self):
+        
+        modify_type = input("Enter 'project' or 'task' ID to modify: ").upper()
+        
+        while True:
+
+            if modify_type[0] == 'P' and modify_type in self.projects:
+                project = self.projects[modify_type]
+                print(f"Current attributes of Project '{modify_type}':")
+                for key, value in project.__dict__.items():
+                     print(f"{key}: {value}")
+
+                attribute = input("Enter the attribute to modify: ")
+                if hasattr(project, attribute):
+                    new_value = input(f"Enter new value for '{attribute}': ")
+                    setattr(project, attribute, new_value)
+                    print(f"Attribute '{attribute}' updated for Project '{modify_type}'.")
+                else:
+                    print(f"Attribute '{attribute}' does not exist in the project.")
+            elif modify_type[0] == 'T' and modify_type in self.tasks:
+                task = self.tasks[modify_type]
+                print(f"Current attributes of Task '{modify_type}':")
+                for key, value in task.__dict__.items():
+                    print(f"{key}: {value}")
+
+                attribute = input("Enter the attribute to modify: ")
+                if hasattr(task, attribute):
+                    new_value = input(f"Enter new value for '{attribute}': ")
+                    setattr(task, attribute, new_value)
+                    print(f"Attribute '{attribute}' updated for Task '{modify_type}'.")
+                else:
+                    print(f"Attribute '{attribute}' does not exist in the task.")
+            else:
+                print("Item not found or invalid item type.")
+            
+            if input(f"Do you want to continue updating {modify_type} (Y/N)?") == 'N':
+                break
+    
     def delete_item(self):
         delete_type = input("Enter 'project' or 'task' ID to delete: ").upper()
         
@@ -70,3 +108,4 @@ class Task(Project):
         self.taskStartDate = startDate
         self.taskDeadline = Deadline
         self.IsTaskCompleted = 'N'
+
