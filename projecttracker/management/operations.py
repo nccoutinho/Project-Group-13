@@ -1,3 +1,6 @@
+from projecttracker.utils import file_handler
+from projecttracker.utils import input_handler
+
 class Operations:
     def __init__(self):
         self.projects = {}
@@ -5,16 +8,18 @@ class Operations:
         
     #def view
         
-    def add_proj(self, **kwargs): #add exceptional handling if proj exists
+    def add_proj(self, **kwargs):
         new_proj = Project(**kwargs)
         self.projects[new_proj.projectID] = new_proj
         print(f"Project '{new_proj.projectID}' added.")
+        file_handler.write_to_json(new_proj, 'project.json')  # Write to JSON file
         return new_proj
-        
+
     def add_task(self, **kwargs):
         new_task = Task(**kwargs)
         self.tasks[new_task.taskID] = new_task
         print(f"Task '{new_task.taskID}' added.")
+        file_handler.write_to_json(new_task, 'task.json')  # Write to JSON file
         return new_task
     
     def modify_item(self):
@@ -108,4 +113,3 @@ class Task(Project):
         self.taskStartDate = startDate
         self.taskDeadline = Deadline
         self.IsTaskCompleted = 'N'
-
