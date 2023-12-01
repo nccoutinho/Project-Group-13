@@ -26,14 +26,14 @@ class Operations:
         new_proj = Project(**kwargs)
         #self.projects[new_proj.projectID] = new_proj
         print(f"Project '{new_proj.projectID}' added.")
-        file_handler.write_to_json(new_proj, 'project.json')  # Write to JSON file
+        file_handler.write_to_json(new_proj, 'project.json', 'a')  # Write to JSON file
         return new_proj
 
     def add_task(self, **kwargs):
         new_task = Task(**kwargs)
         #self.tasks[new_task.taskID] = new_task
         print(f"Task '{new_task.taskID}' added.")
-        file_handler.write_to_json(new_task, 'task.json')  # Write to JSON file
+        file_handler.write_to_json(new_task, 'task.json', 'a')  # Write to JSON file
         return new_task
     
     def modify_item(self):
@@ -77,7 +77,7 @@ class Operations:
     def delete_item(self):
         projects_from_json = file_handler.read_from_json('project.json')
         project_ids = [project['projectID'] for project in projects_from_json]
-        tasks_from_json = file_handler.read_from_json('tasks.json')
+        tasks_from_json = file_handler.read_from_json('task.json')
         task_ids = [task['taskID'] for task in tasks_from_json]
         
         delete_type = input("Enter 'project' or 'task' ID to delete: ").upper()
@@ -85,7 +85,10 @@ class Operations:
         if delete_type[0] == 'P':
             if delete_type in project_ids:
                 project_list = [project for project in projects_from_json if project['projectID'] != delete_type]
-                file_handler.write_to_json(project_list, 'task.json')
+                file_handler.write_to_json({}, 'project.json', 'w')
+                for project_item in project_list:
+                    file_handler.write_to_json(project_list, 'project.json')
+                file_handler.write_to_json(project_list, 'project.json')
                 return delete_type
             else:
                 print(f"Project '{delete_type}' not found.")
@@ -93,7 +96,7 @@ class Operations:
         elif delete_type[0] == 'T':
             if delete_type in task_ids:
                 task_list = [task for task in tasks_from_json if task['taskID'] != delete_type]
-                file_handler.write_to_json(task_list, 'project.json')
+                file_handler.write_to_json(task_list, 'task.json')
                 print(f"Task '{delete_type}' deleted.")
                 return delete_type
             else:

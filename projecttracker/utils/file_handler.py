@@ -1,7 +1,7 @@
 import json
 
-def write_to_json(obj, file_name):
-    with open(file_name, 'w') as json_file:
+def write_to_json(obj, file_name, method = 'a'):
+    with open(file_name, method) as json_file:
         json.dump(obj.__dict__, json_file)
         json_file.write('\n')
 
