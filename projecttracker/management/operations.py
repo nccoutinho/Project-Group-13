@@ -84,10 +84,9 @@ class Operations:
             return None
 
 class Project(Operations):
-    project_counter = 0
     def __init__(self, Name, Priority, Duration, Comments, assignedTo, startDate, Deadline, Owner):
-        Project.project_counter += 1
-        self.projectID = f'P{Project.project_counter:04}'
+        project_id = self.get_next_project_id()
+        self.projectID = f'P{project_id:04}'
         self.projectName = Name
         self.projectPriority = Priority
         self.projectDuration = Duration
@@ -98,7 +97,20 @@ class Project(Operations):
         self.projectOwner = Owner
         self.IsProjectCompleted = 'N'
 
-
+    def get_next_project_id(self):
+        last_project_id = 0
+        try:
+            projects_from_json = file_handler.read_from_json('project.json')
+        except:
+            pass
+        else:
+            project_ids = [project['projectID'] for project in projects_from_json]
+            last_inserted_project_id = max(project_ids, key=lambda x: int(x[1:]))
+            last_project_id = int(last_inserted_project_id[1:])
+        finally:
+            last_project_id += 1
+            return last_project_id
+    
 class Task(Project):
     task_counter = 0
     def __init__(self, projectID, Name, Priority, Duration, Comments, assignedTo, startDate, Deadline):
