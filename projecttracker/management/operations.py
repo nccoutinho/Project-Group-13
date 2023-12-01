@@ -1,12 +1,26 @@
 from projecttracker.utils import file_handler
 from projecttracker.utils import input_handler
+import pandas as pd
 
 class Operations:
     def __init__(self):
         self.projects = {}
         self.tasks = {}
         
-    #def view
+    def view(self):
+        # Read projects and tasks from JSON files
+        projects_from_json = file_handler.read_from_json('project.json')
+        tasks_from_json = file_handler.read_from_json('task.json')
+        
+        # Convert data to pandas DataFrame
+        task_df = pd.DataFrame(tasks_from_json)
+        project_df = pd.DataFrame(projects_from_json)
+
+        # Merge the two DataFrames on 'projectID'
+        result_df = pd.merge(project_df, task_df, on='projectID', how='left')
+
+        # Display the result
+        result_df.head(10)
         
     def add_proj(self, **kwargs):
         new_proj = Project(**kwargs)
