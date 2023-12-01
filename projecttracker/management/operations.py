@@ -85,10 +85,9 @@ class Operations:
         if delete_type[0] == 'P':
             if delete_type in project_ids:
                 project_list = [project for project in projects_from_json if project['projectID'] != delete_type]
-                file_handler.write_to_json({}, 'project.json', 'w')
+                file_handler.delete_all_objects('project.json')
                 for project_item in project_list:
-                    file_handler.write_to_json(project_list, 'project.json')
-                file_handler.write_to_json(project_list, 'project.json')
+                    file_handler.write_to_json_dict(project_item, 'project.json')
                 return delete_type
             else:
                 print(f"Project '{delete_type}' not found.")
