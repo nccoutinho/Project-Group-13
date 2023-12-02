@@ -24,17 +24,22 @@ class Operations:
         
     def add_proj(self, **kwargs):
         new_proj = Project(**kwargs)
-        #self.projects[new_proj.projectID] = new_proj
         print(f"Project '{new_proj.projectID}' added.")
         file_handler.write_to_json(new_proj, 'project.json', 'a')  # Write to JSON file
         return new_proj
 
     def add_task(self, **kwargs):
         new_task = Task(**kwargs)
-        #self.tasks[new_task.taskID] = new_task
-        print(f"Task '{new_task.taskID}' added.")
-        file_handler.write_to_json(new_task, 'task.json', 'a')  # Write to JSON file
-        return new_task
+        projects_from_json = file_handler.read_from_json('project.json')
+        project_ids = [project['projectID'] for project in projects_from_json]
+        
+        if new_task.projectID in project_ids:
+            file_handler.write_to_json(new_task, 'task.json', 'a')  # Write to JSON file
+            print(f"Task '{new_task.taskID}' added.")
+            return new_task
+        else:
+            print(f"Project {new_task.projectID} does not exist.")
+            return None
     
     def modify_item(self):
         
