@@ -48,3 +48,10 @@ def gantt_chart():
     # Show the Gantt chart for each Project holding different Tasks
     fig.show()
 
+def pie_chart():
+    # Create a Pie chart for the Project holding different Tasks
+    fig = px.pie(data, names='Status', title='Task Status Distribution',
+        color_discrete_map={'Completed': 'lightcoral', 'In Progress': 'blue', 'Not Started': 'green'})
+
+# Show the Pie Chart
+fig.show()  
