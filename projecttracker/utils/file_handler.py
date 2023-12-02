@@ -36,4 +36,5 @@ def write_to_json_dict(obj, file_name, method = 'a'):
         json_file.write('\n')
 
 def download_csv(data, file_path):
+    file_path = f"{file_path}/project_details.csv"
     data.to_csv(file_path, index=False)

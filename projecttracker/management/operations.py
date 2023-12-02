@@ -1,6 +1,7 @@
 from projecttracker.utils import file_handler
 from projecttracker.utils import input_handler
 import pandas as pd
+from IPython.display import clear_output
 
 class Operations:
     def __init__(self):
@@ -29,7 +30,7 @@ class Operations:
                 result_df = pd.merge(project_df, task_df, on='projectID', how='left')
 
                 # Display the result
-                return result_df.head(10)
+                return result_df
             
         except Exception as e:
             print(f"An error occurred: {e}")
@@ -83,6 +84,7 @@ class Operations:
             item = items_list[item_index]
 
             # Display current attributes
+            clear_output(wait=True)
             print(f"Current attributes of {modify_type}:")
             for key, value in item.items():
                 print(f"{key}: {value}")
