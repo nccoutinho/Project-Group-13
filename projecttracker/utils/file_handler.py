@@ -1,4 +1,5 @@
 import json
+import pandas as pd
 
 def write_to_json(obj, file_name, method = 'a'):
     with open(file_name, method) as json_file:
