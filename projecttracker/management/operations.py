@@ -88,6 +88,7 @@ class Operations:
                 file_handler.delete_all_objects('project.json')
                 for project_item in project_list:
                     file_handler.write_to_json_dict(project_item, 'project.json')
+                print(f"Project '{delete_type}' deleted.")
                 return delete_type
             else:
                 print(f"Project '{delete_type}' not found.")
@@ -95,7 +96,9 @@ class Operations:
         elif delete_type[0] == 'T':
             if delete_type in task_ids:
                 task_list = [task for task in tasks_from_json if task['taskID'] != delete_type]
-                file_handler.write_to_json(task_list, 'task.json')
+                file_handler.delete_all_objects('task.json')
+                for task_item in task_list:
+                    file_handler.write_to_json_dict(task_item, 'task.json')
                 print(f"Task '{delete_type}' deleted.")
                 return delete_type
             else:
