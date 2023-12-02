@@ -9,6 +9,12 @@ def get_user_choice():
 
 def get_project_input():
     return input('Enter Project Name:')
+    
+def get_task_input():
+    return input('Enter Task Name:')
+
+def get_projectID_input():
+    return input('Enter Project ID:')
 
 def get_priority_input():
     return input('Enter priority:')
@@ -33,3 +39,6 @@ def get_owner_input():
     
 def get_project_task_id():
     return input('Enter project or task ID:').upper()
+
+def any_key_continue():
+    return input("Press any key to continue.")

@@ -8,19 +8,32 @@ class Operations:
         self.tasks = {}
         
     def view(self):
-        # Read projects and tasks from JSON files
-        projects_from_json = file_handler.read_from_json('project.json')
-        tasks_from_json = file_handler.read_from_json('task.json')
-        
-        # Convert data to pandas DataFrame
-        task_df = pd.DataFrame(tasks_from_json)
-        project_df = pd.DataFrame(projects_from_json)
+        try:
+            # Read projects and tasks from JSON files
+            projects_from_json = file_handler.read_from_json('project.json')
+            tasks_from_json = file_handler.read_from_json('task.json')
 
-        # Merge the two DataFrames on 'projectID'
-        result_df = pd.merge(project_df, task_df, on='projectID', how='left')
+            # Check if both projects and tasks data are available
+            if not projects_from_json:
+                print("No data available for projects.")
+                return None
+            elif not tasks_from_json:
+                project_df = pd.DataFrame(projects_from_json)
+                return project_df.head(10)
+            else:
+                # Convert data to pandas DataFrame
+                project_df = pd.DataFrame(projects_from_json)
+                task_df = pd.DataFrame(tasks_from_json)
 
-        # Display the result
-        result_df.head(10)
+                # Merge projects and tasks separately using left merge
+                result_df = pd.merge(project_df, task_df, on='projectID', how='left')
+
+                # Display the result
+                return result_df.head(10)
+            
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return None
         
     def add_proj(self, **kwargs):
         new_proj = Project(**kwargs)
@@ -42,42 +55,65 @@ class Operations:
             return None
     
     def modify_item(self):
-        
         modify_type = input("Enter 'project' or 'task' ID to modify: ").upper()
         
         while True:
+            # Read data from JSON files
+            projects_from_json = file_handler.read_from_json('project.json')
+            tasks_from_json = file_handler.read_from_json('task.json')
 
-            if modify_type[0] == 'P' and modify_type in self.projects:
-                project = self.projects[modify_type]
-                print(f"Current attributes of Project '{modify_type}':")
-                for key, value in project.__dict__.items():
-                     print(f"{key}: {value}")
-
-                attribute = input("Enter the attribute to modify: ")
-                if hasattr(project, attribute):
-                    new_value = input(f"Enter new value for '{attribute}': ")
-                    setattr(project, attribute, new_value)
-                    print(f"Attribute '{attribute}' updated for Project '{modify_type}'.")
-                else:
-                    print(f"Attribute '{attribute}' does not exist in the project.")
-            elif modify_type[0] == 'T' and modify_type in self.tasks:
-                task = self.tasks[modify_type]
-                print(f"Current attributes of Task '{modify_type}':")
-                for key, value in task.__dict__.items():
-                    print(f"{key}: {value}")
-
-                attribute = input("Enter the attribute to modify: ")
-                if hasattr(task, attribute):
-                    new_value = input(f"Enter new value for '{attribute}': ")
-                    setattr(task, attribute, new_value)
-                    print(f"Attribute '{attribute}' updated for Task '{modify_type}'.")
-                else:
-                    print(f"Attribute '{attribute}' does not exist in the task.")
+            # Identify the list and ID based on user input
+            if modify_type[0] == 'P':
+                items_list = projects_from_json
+                item_ids = [project['projectID'] for project in projects_from_json]
+            elif modify_type[0] == 'T':
+                items_list = tasks_from_json
+                item_ids = [task['taskID'] for task in tasks_from_json]
             else:
-                print("Item not found or invalid item type.")
-            
-            if input(f"Do you want to continue updating {modify_type} (Y/N)?") == 'N':
-                break
+                print("Invalid input. Please enter correct 'project' or 'task' IDs.")
+                break  # Exit the loop if the input is invalid
+
+            # Check if the specified ID exists
+            if modify_type not in item_ids:
+                print(f"{modify_type} not found.")
+                break  # Exit the loop if the ID is not found
+
+            # Find the dictionary with the specified ID
+            item_index = item_ids.index(modify_type)
+            item = items_list[item_index]
+
+            # Display current attributes
+            print(f"Current attributes of {modify_type}:")
+            for key, value in item.items():
+                print(f"{key}: {value}")
+
+            # Get the attribute to modify
+            attribute = input("Enter the attribute to modify: ")
+
+            # Check if the attribute exists
+            if attribute not in item:
+                print(f"Attribute '{attribute}' does not exist in {modify_type}.")
+            else:
+                # Get the new value for the attribute
+                new_value = input(f"Enter new value for '{attribute}': ")
+
+                # Update the attribute in the dictionary
+                item[attribute] = new_value
+
+                # Write the modified list of dictionaries back to the JSON file
+                if modify_type[0] == 'P':
+                    file_handler.delete_all_objects('project.json')
+                    for project_item in projects_from_json:
+                        file_handler.write_to_json_dict(project_item, 'project.json')
+                elif modify_type[0] == 'T':
+                    file_handler.delete_all_objects('task.json')
+                    for task_item in tasks_from_json:
+                        file_handler.write_to_json_dict(task_item, 'task.json')
+
+                print(f"Attribute '{attribute}' updated for '{modify_type}'.")
+
+            if input(f"Do you want to continue updating {modify_type} (Y/N)?").upper() != 'Y':
+                break  # Exit the loop if the user does not want to continue
     
     def delete_item(self):
         projects_from_json = file_handler.read_from_json('project.json')
@@ -125,7 +161,7 @@ class Project(Operations):
         self.projectStartDate = startDate 
         self.projectDeadline = Deadline
         self.projectOwner = Owner
-        self.IsProjectCompleted = 'N'
+        self.projectStatus = 'Not Started'
 
     def get_next_project_id(self):
         last_project_id = 0
@@ -153,7 +189,7 @@ class Task(Project):
         self.assignedToTask = assignedTo
         self.taskStartDate = startDate
         self.taskDeadline = Deadline
-        self.IsTaskCompleted = 'N'
+        self.taskStatus = 'Not Started'
 
     def get_next_task_id(self):
             last_task_id = 0
