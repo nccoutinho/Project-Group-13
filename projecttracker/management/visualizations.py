@@ -46,6 +46,7 @@ def gantt_chart():
     # Show the Gantt chart for each Project holding different Tasks
     fig.show()
 
+
 def pie_chart():
     project_id = input("Enter Project ID: ")
     data = []
@@ -61,6 +62,7 @@ def pie_chart():
 
     # Show the Pie Chart
     fig.show()  
+
 
 def scatter_plot():
     data = []
