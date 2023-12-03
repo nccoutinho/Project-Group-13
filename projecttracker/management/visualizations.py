@@ -1,7 +1,7 @@
-from projecttracker.utils import file_handler
 import plotly.express as px
 import datetime
 import pandas as pd
+from projecttracker.utils import file_handler, input_handler
 
 def gantt_chart():
     '''
@@ -20,7 +20,7 @@ def gantt_chart():
     fig.show()
 
     # Display Gantt chart for a specific project's tasks
-    project_id = input("Enter Project ID: ")
+    project_id = input_handler.get_project_id()
     data_project = []
     tasks_from_json = file_handler.read_from_json('task.json')
     task_list = [task for task in tasks_from_json if task['projectID'] == project_id]
@@ -55,7 +55,7 @@ def pie_chart():
     '''
     Generates and displays a Pie chart for task status distribution in a project.
     '''
-    project_id = input("Enter Project ID: ")
+    project_id = input_handler.get_project_id()
     data = []
     tasks_from_json = file_handler.read_from_json('task.json')
     task_list = [task for task in tasks_from_json if task['projectID'] == project_id]

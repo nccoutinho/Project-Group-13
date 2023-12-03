@@ -129,3 +129,6 @@ def get_file_path():
         str: File path input by the user.
     '''
     return input('Enter the file path you want to download the file to:')
+
+def get_project_id():
+    return input("Enter Project ID:").upper()
