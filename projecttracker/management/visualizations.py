@@ -35,6 +35,7 @@ def gantt_chart():
     # Show the Gantt chart
     fig.show()
 
+    # Display Gantt chart for a specific project's tasks
     project_id = input("Enter Project ID: ")
     data_project = []
     tasks_from_json = file_handler.read_from_json('task.json')
@@ -51,6 +52,9 @@ def gantt_chart():
 
 
 def pie_chart():
+    '''
+    Generates and displays a Pie chart for task status distribution in a project.
+    '''
     project_id = input("Enter Project ID: ")
     data = []
     tasks_from_json = file_handler.read_from_json('task.json')
@@ -68,6 +72,9 @@ def pie_chart():
 
 
 def scatter_plot():
+    '''
+    Generates and displays a Scatter plot showing project duration vs. priority.
+    '''
     data = []
     projects_from_json = file_handler.read_from_json('project.json')
     project_list = [project for project in projects_from_json]
@@ -82,6 +89,9 @@ def scatter_plot():
     fig.show()
 
 def bar_chart():
+    '''
+    Generates and displays a Bar chart showing the number of tasks in each project.
+    '''
     tasks_from_json = file_handler.read_from_json('task.json')
     df = pd.DataFrame(tasks_from_json)
 
