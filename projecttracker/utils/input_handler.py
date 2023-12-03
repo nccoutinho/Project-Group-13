@@ -29,10 +29,10 @@ def get_assigned_input():
     return input('Enter name of the person it is assigned to:')
 
 def get_start_date_input():
-    return input('Enter start date:')
+    return input('Enter start date (YYYY-MM-DD):')
     
 def get_deadline_input():
-    return input('Enter deadline:')
+    return input('Enter deadline (YYYY-MM-DD):')
     
 def get_owner_input():
     return input('Enter name of the owner:')
