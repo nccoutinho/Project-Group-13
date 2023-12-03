@@ -124,7 +124,11 @@ class Operations:
         task_ids = [task['taskID'] for task in tasks_from_json]
         
         delete_type = input("Enter 'project' or 'task' ID to delete: ").upper()
+
+        confirm_delete = input(f"Are you sure you want to delete {delete_type} Y/N? ").upper()
         
+        if confirm_delete != "Y":
+            return None
         if delete_type[0] == 'P':
             if delete_type in project_ids:
                 project_list = [project for project in projects_from_json if project['projectID'] != delete_type]
