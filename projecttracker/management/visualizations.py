@@ -80,7 +80,7 @@ def scatter_plot():
     project_list = [project for project in projects_from_json]
 
     # Create a scatter plot
-    fig = px.scatter(project_list, x='projectPriority', y='projectDuration', color='projectPriority', title='Project Duration vs. Priority')
+    fig = px.scatter(project_list, x='projectPriority', y='projectDuration', color='projectPriority', title='Project Duration vs. Priority', size_max=50)
 
     # Update layout
     fig.update_layout(xaxis_title='projectPriority', yaxis_title='projectDuration', showlegend=True)
