@@ -79,7 +79,7 @@ class Operations:
             return None
     
     def modify_item(self):
-         '''Modify attributes of a project or task.'''
+        '''Modify attributes of a project or task.'''
         modify_type = input("Enter 'project' or 'task' ID to modify: ").upper()
         
         while True:
