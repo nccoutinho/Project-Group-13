@@ -16,22 +16,6 @@ def gantt_chart():
     # Create a Gantt chart
     fig = px.timeline(data, x_start="Start", x_end="Finish", y="Project", hover_data={"Priority": True})
 
-    # Current date
-    current_date = datetime.datetime.now().strftime('%Y-%m-%d')
-
-    # Add a vertical line for the current date
-    fig.update_layout(shapes=[
-        dict(
-            type="line",
-            x0=current_date,
-            x1=current_date,
-            y0=0,
-            y1=1,
-            yref="paper",
-            line=dict(color="black", width=2),
-        )
-    ])
-
     # Show the Gantt chart
     fig.show()
 
@@ -46,6 +30,22 @@ def gantt_chart():
 
     # Create a Gantt chart for each Project holding different Tasks
     fig = px.timeline(data_project, x_start="Start", x_end="Finish", y="Task", hover_data={"Priority": True}, labels={"Task": f"Project: {project_id}"})
+
+     # Current date
+    current_date = datetime.datetime.now().strftime('%Y-%m-%d')
+
+    # Add a vertical line for the current date
+    fig.update_layout(shapes=[
+        dict(
+            type="line",
+            x0=current_date,
+            x1=current_date,
+            y0=0,
+            y1=1,
+            yref="paper",
+            line=dict(color="black", width=2),
+        )
+    ])
 
     # Show the Gantt chart for each Project holding different Tasks
     fig.show()
