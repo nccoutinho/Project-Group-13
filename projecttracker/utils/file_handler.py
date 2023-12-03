@@ -61,10 +61,10 @@ def delete_all_objects(file_path):
 
 def write_to_json_dict(obj, file_name, method = 'a'):
     '''
-    Writes object data into a JSON file.
+    Writes dictionary data into a JSON file.
 
     Args:
-        obj: Object to be written to JSON.
+        obj: Dictionary to be written to JSON.
         file_name (str): Name of the JSON file.
         method (str): Writing mode, default is 'a' (append).
 
