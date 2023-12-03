@@ -1,0 +1,3 @@
+{"projectID": "P0001", "taskID": "T0001", "taskName": "Prty", "taskPriority": "high", "taskDuration": "4", "taskComments": "op", "assignedToTask": "op", "taskStartDate": "2023-11-30", "taskDeadline": "2023-12-09", "taskStatus": "Not Started"}
+{"projectID": "P0001", "taskID": "T0002", "taskName": "task 2", "taskPriority": "medium", "taskDuration": "12", "taskComments": "qwerty", "assignedToTask": "qwert", "taskStartDate": "2023-12-09", "taskDeadline": "2023-12-12", "taskStatus": "In Progress"}
+{"projectID": "P0001", "taskID": "T0003", "taskName": "Task 3", "taskPriority": "low", "taskDuration": "3", "taskComments": "asd", "assignedToTask": "asd", "taskStartDate": "2023-11-30", "taskDeadline": "2023-12-09", "taskStatus": "Completed"}

@@ -53,10 +53,10 @@ def pie_chart():
     task_list = [task for task in tasks_from_json if task['projectID'] == project_id]
 
     for x in task_list:
-        data.append(dict(Task=x['taskName'], Start=x['taskStartDate'], Finish=x['taskDeadline'], Priority=x['taskPriority']))
+        data.append(dict(Task=x['taskName'], Start=x['taskStartDate'], Finish=x['taskDeadline'], Status=x['taskStatus']))
 
     # Create a Pie chart for the Project holding different Tasks
-    fig = px.pie(data, names='Status', title='Task Status Distribution',
+    fig = px.pie(data, names='Status', title=f'Task Status Distribution for {project_id}',
         color_discrete_map={'Completed': 'lightcoral', 'In Progress': 'blue', 'Not Started': 'green'})
 
     # Show the Pie Chart
