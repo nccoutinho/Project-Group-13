@@ -56,7 +56,7 @@ def get_duration_input():
     Returns:
         str: Duration input by the user.
     '''
-    return input('Enter duration:')
+    return input('Enter duration in months:')
 
 def get_comments_input():
     '''
