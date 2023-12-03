@@ -4,6 +4,9 @@ import datetime
 import pandas as pd
 
 def gantt_chart():
+    '''
+    Generates and displays a Gantt chart.
+    '''
     data = []
     projects_from_json = file_handler.read_from_json('project.json')
     project_list = [project for project in projects_from_json]
