@@ -1,7 +1,4 @@
-import os
-os.chdir('/Users/nats/Desktop/Project-Group-13')
 from projecttracker.utils import file_handler
-
 import plotly.express as px
 import datetime
 import pandas as pd
