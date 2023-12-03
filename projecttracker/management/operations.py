@@ -4,11 +4,15 @@ import pandas as pd
 from IPython.display import clear_output
 
 class Operations:
+    '''Class that manages project and task operations.'''
+
     def __init__(self):
+        '''Initializes Operations class with empty dictionaries to store projects and tasks.'''
         self.projects = {}
         self.tasks = {}
         
     def view(self):
+        '''View projects and associated tasks.'''
         try:
             # Read projects and tasks from JSON files
             projects_from_json = file_handler.read_from_json('project.json')

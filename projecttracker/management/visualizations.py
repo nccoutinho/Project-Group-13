@@ -35,18 +35,26 @@ def gantt_chart():
     project_id = input("Enter Project ID: ")
     data_project = []
     tasks_from_json = file_handler.read_from_json('task.json')
-    task_list = [task for task in tasks_from_json if task['projectID'] == project_id_input]
+    task_list = [task for task in tasks_from_json if task['projectID'] == project_id]
 
     for x in task_list:
-        data.append(dict(Task=x['taskName'], Start=x['taskStartDate'], Finish=x['taskDeadline'], Priority=x['taskPriority']))
+        data_project.append(dict(Task=x['taskName'], Start=x['taskStartDate'], Finish=x['taskDeadline'], Priority=x['taskPriority']))
 
     # Create a Gantt chart for each Project holding different Tasks
-    fig = px.timeline(data, x_start="Start", x_end="Finish", y="Task", hover_data={"Priority": True}, labels={"Task": f"Project: {project_id_input}"})
+    fig = px.timeline(data_project, x_start="Start", x_end="Finish", y="Task", hover_data={"Priority": True}, labels={"Task": f"Project: {project_id}"})
 
     # Show the Gantt chart for each Project holding different Tasks
     fig.show()
 
 def pie_chart():
+    project_id = input("Enter Project ID: ")
+    data = []
+    tasks_from_json = file_handler.read_from_json('task.json')
+    task_list = [task for task in tasks_from_json if task['projectID'] == project_id]
+
+    for x in task_list:
+        data.append(dict(Task=x['taskName'], Start=x['taskStartDate'], Finish=x['taskDeadline'], Priority=x['taskPriority']))
+
     # Create a Pie chart for the Project holding different Tasks
     fig = px.pie(data, names='Status', title='Task Status Distribution',
         color_discrete_map={'Completed': 'lightcoral', 'In Progress': 'blue', 'Not Started': 'green'})
