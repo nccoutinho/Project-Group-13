@@ -47,7 +47,7 @@ def get_priority_input():
     Returns:
         str: Priority input by the user.
     '''
-    return input('Enter priority:')
+    return input('Enter priority (low, medium, high):').lower()
 
 def get_duration_input():
     '''

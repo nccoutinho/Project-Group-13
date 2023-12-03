@@ -119,8 +119,21 @@ def add_project(op):
     Add a new project with user input.
     """
     name = input_handler.get_project_input()
-    priority = input_handler.get_priority_input()
-    duration = input_handler.get_duration_input()
+    while True:
+        priority_options = ['low', 'medium', 'high']
+        priority = input_handler.get_priority_input()
+        if priority in priority_options:
+            break
+        else:
+            print('Invalid input. Please enter low, medium or high as the priority.')
+    while True:
+        duration = input_handler.get_duration_input()
+        try:
+            duration = int(duration)
+        except ValueError:
+            print('Invalid input. Please enter a number for duration.')
+        else:
+            break
     comments = input_handler.get_comments_input()
     assigned_to = input_handler.get_assigned_input()
     start_date = input_handler.get_start_date_input()
@@ -136,8 +149,21 @@ def add_task(op):
     """
     name = input_handler.get_task_input()
     project_id = input_handler.get_projectID_input()
-    priority = input_handler.get_priority_input()
-    duration = input_handler.get_duration_input()
+    while True:
+        priority_options = ['low', 'medium', 'high']
+        priority = input_handler.get_priority_input()
+        if priority in priority_options:
+            break
+        else:
+            print('Invalid input. Please enter low, medium or high as the priority.')
+    while True:
+        duration = input_handler.get_duration_input()
+        try:
+            duration = int(duration)
+        except ValueError:
+            print('Invalid input. Please enter a number for duration.')
+        else:
+            break
     comments = input_handler.get_comments_input()
     assigned_to = input_handler.get_assigned_input()
     start_date = input_handler.get_start_date_input()
