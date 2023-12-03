@@ -1,7 +1,6 @@
-from projecttracker.utils import file_handler
-from projecttracker.utils import input_handler
 import pandas as pd
 from IPython.display import clear_output
+from projecttracker.utils import file_handler, input_handler
 
 class Operations:
     '''Class that manages project and task operations.'''
@@ -80,7 +79,7 @@ class Operations:
     
     def modify_item(self):
         '''Modify attributes of a project or task.'''
-        modify_type = input("Enter 'project' or 'task' ID to modify: ").upper()
+        modify_type = input_handler.get_project_task_id()
         
         while True:
             # Read data from JSON files
@@ -148,7 +147,7 @@ class Operations:
         tasks_from_json = file_handler.read_from_json('task.json')
         task_ids = [task['taskID'] for task in tasks_from_json]
         
-        delete_type = input("Enter 'project' or 'task' ID to delete: ").upper()
+        delete_type = input_handler.get_project_task_id()
 
         confirm_delete = input(f"Are you sure you want to delete {delete_type} Y/N? ").upper()
         
