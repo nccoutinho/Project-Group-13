@@ -14,7 +14,7 @@ def gantt_chart():
             data.append(dict(Project=x["projectName"], Start=x["projectStartDate"], Finish=x["projectDeadline"], Priority=x["projectPriority"]))
 
     # Create a Gantt chart
-    fig = px.timeline(data, x_start="Start", x_end="Finish", y="Project", hover_data={"Priority": True})
+    fig = px.timeline(data, x_start="Start", x_end="Finish", y="Project", hover_data={"Priority": True}, title='Project Schedule')
 
     # Show the Gantt chart
     fig.show()
@@ -29,7 +29,7 @@ def gantt_chart():
         data_project.append(dict(Task=x['taskName'], Start=x['taskStartDate'], Finish=x['taskDeadline'], Priority=x['taskPriority']))
 
     # Create a Gantt chart for each Project holding different Tasks
-    fig = px.timeline(data_project, x_start="Start", x_end="Finish", y="Task", hover_data={"Priority": True}, labels={"Task": f"Project: {project_id}"})
+    fig = px.timeline(data_project, x_start="Start", x_end="Finish", y="Task", hover_data={"Priority": True}, labels={"Task": f"Project: {project_id}"}, title=f'Task Schedule for Project {project_id}')
 
      # Current date
     current_date = datetime.datetime.now().strftime('%Y-%m-%d')
