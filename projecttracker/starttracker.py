@@ -5,7 +5,9 @@ from projecttracker.utils import input_handler, file_handler
 from projecttracker.management import operations, visualizations
 
 def display_menu():
-    
+    """
+    Display the main menu options for the Project Tracker application.
+    """
     print("\n===== Project Tracker =====", flush=True)
     print("1. View")
     print("2. Add Projects")
@@ -17,6 +19,9 @@ def display_menu():
     print("8. Exit", flush=True)
 
 def viz_menu():
+    """
+    Display the visualization menu options for the Project Tracker application.
+    """
     print("\n===== Visualization Menu =====", flush=True)
     print("1. Project Schedule Overview")
     print("2. Task Status Distribution by Project")
@@ -25,7 +30,9 @@ def viz_menu():
     print("5. Exit", flush=True)
 
 def viz_define():
-    
+    """
+    Define the actions for each option in the Visualization Menu.
+    """
     while True:
         clear_output(wait=True)
         viz_menu()
@@ -52,6 +59,9 @@ def viz_define():
                 
 
 def startup():
+    """
+    Start the Project Tracker application and handle user interactions.
+    """
     op = operations.Operations()
 
     while True:
@@ -96,13 +106,18 @@ def startup():
         clear_output(wait=True)
 
 def view_projects(op):
+    """
+    View and display project details.
+    """
     df = op.view()
     if df is not None and not df.empty:
         print(df.head(10))
     input_handler.any_key_continue()
 
 def add_project(op):
-    # Get project details
+    """
+    Add a new project with user input.
+    """
     name = input_handler.get_project_input()
     priority = input_handler.get_priority_input()
     duration = input_handler.get_duration_input()
@@ -112,12 +127,13 @@ def add_project(op):
     deadline = input_handler.get_deadline_input()
     owner = input_handler.get_owner_input()
 
-    # Add project
     op.add_proj(Name=name, Priority=priority, Duration=duration, Comments=comments,
                 assignedTo=assigned_to, startDate=start_date, Deadline=deadline, Owner=owner)
 
 def add_task(op):
-    # Get task details
+    """
+    Add a new task with user input to the corresponding project.
+    """
     name = input_handler.get_task_input()
     project_id = input_handler.get_projectID_input()
     priority = input_handler.get_priority_input()
@@ -127,6 +143,5 @@ def add_task(op):
     start_date = input_handler.get_start_date_input()
     deadline = input_handler.get_deadline_input()
 
-    # Add task
     op.add_task(projectID=project_id, Name=name, Priority=priority, Duration=duration, Comments=comments,
                 assignedTo=assigned_to, startDate=start_date, Deadline=deadline)
