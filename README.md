@@ -1,12 +1,45 @@
 # Project-Group-13 - Project Tracker Application
 
-## Pranav Kumar Mahesh - 39703434
+#### Pranav Kumar Mahesh - 39703434
 
-## Natalie Crystal Coutinho - 66731928
+#### Natalie Crystal Coutinho - 66731928
+
+_This documentation outlines the functionalities and usage of the Project Tracker application's Python module._
+
+_The Project Tracker application is a Python-based package designed to manage and visualize project-related data. It offers functionalities to handle projects, tasks, and visualizations of project-related metrics._
+
+---
 
 # Project Tracker 
 
-The **_projecttracker_ package** managing projects and tasks. 
+The **_projecttracker_ package** manages projects and tasks. 
+
+The **_starttracker_** boots up the projecttracker application.
+
+### `display_menu()`
+- Display the main menu options for the Project Tracker application.
+
+### `viz_menu()`
+- Display the visualization menu options for the Project Tracker application.
+
+### `viz_define()`
+- Define the actions for each option in the Visualization Menu.
+
+### `startup()`
+- Start the Project Tracker application and handle user interactions.
+
+### `view_projects()`
+- View and display project details.
+
+### `add_project()`
+- Add a new project with user input.
+
+### `add_task()`
+- Add a new task with user input to the corresponding project.
+
+## Usage
+
+The functions provided here can be utilized to build a command-line interface for managing projects and tasks efficiently.
 
 The **_management_ subpackage** contains **module _operations_** have classes that inherit functionalities:
 
