@@ -65,7 +65,7 @@ def pie_chart():
 
     # Create a Pie chart for the Project holding different Tasks
     fig = px.pie(data, names='Status', title=f'Task Status Distribution for {project_id}',
-        color_discrete_map={'Completed': 'lightcoral', 'In Progress': 'blue', 'Not Started': 'green'})
+        color_discrete_map={'Completed': 'lightcoral', 'In Progress': 'blue', 'Not Started': 'green', 'On Hold': 'yellow'})
 
     # Show the Pie Chart
     fig.show()  

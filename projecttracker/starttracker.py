@@ -1,5 +1,6 @@
 from IPython.display import clear_output
 import time
+from datetime import datetime
 
 from projecttracker.utils import input_handler, file_handler
 from projecttracker.management import operations, visualizations
@@ -134,10 +135,28 @@ def add_project(op):
             print('Invalid input. Please enter a number for duration.')
         else:
             break
+    
     comments = input_handler.get_comments_input()
     assigned_to = input_handler.get_assigned_input()
-    start_date = input_handler.get_start_date_input()
-    deadline = input_handler.get_deadline_input()
+    
+    while True:
+        try:
+            start_date = input_handler.get_start_date_input()
+            start_date = datetime.strptime(start_date, '%Y-%m-%d')
+            break
+        except ValueError:
+            print('Invalid date format. Please enter the date in YYYY-MM-DD format.')
+
+    while True:
+        try:
+            deadline = input_handler.get_deadline_input()
+            deadline = datetime.strptime(deadline, '%Y-%m-%d')
+            if deadline > start_date:
+                break
+            else:
+                print('Deadline must be greater than the start date.')
+        except ValueError:
+            print('Invalid date format. Please enter the date in YYYY-MM-DD format.')
     owner = input_handler.get_owner_input()
 
     op.add_proj(Name=name, Priority=priority, Duration=duration, Comments=comments,
@@ -164,10 +183,28 @@ def add_task(op):
             print('Invalid input. Please enter a number for duration.')
         else:
             break
+    
     comments = input_handler.get_comments_input()
     assigned_to = input_handler.get_assigned_input()
-    start_date = input_handler.get_start_date_input()
-    deadline = input_handler.get_deadline_input()
+    
+    while True:
+        try:
+            start_date = input_handler.get_start_date_input()
+            start_date = datetime.strptime(start_date, '%Y-%m-%d')
+            break
+        except ValueError:
+            print('Invalid date format. Please enter the date in YYYY-MM-DD format.')
+
+    while True:
+        try:
+            deadline = input_handler.get_deadline_input()
+            deadline = datetime.strptime(deadline, '%Y-%m-%d')
+            if deadline > start_date:
+                break
+            else:
+                print('Deadline must be greater than the start date.')
+        except ValueError:
+            print('Invalid date format. Please enter the date in YYYY-MM-DD format.')
 
     op.add_task(projectID=project_id, Name=name, Priority=priority, Duration=duration, Comments=comments,
                 assignedTo=assigned_to, startDate=start_date, Deadline=deadline)
