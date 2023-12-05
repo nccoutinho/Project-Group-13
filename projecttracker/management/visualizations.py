@@ -64,8 +64,7 @@ def pie_chart():
         data.append(dict(Task=x['taskName'], Start=x['taskStartDate'], Finish=x['taskDeadline'], Status=x['taskStatus']))
 
     # Create a Pie chart for the Project holding different Tasks
-    fig = px.pie(data, names='Status', title=f'Task Status Distribution for {project_id}',
-        color_discrete_map={'Completed': 'lightcoral', 'In Progress': 'blue', 'Not Started': 'green', 'On Hold': 'yellow'})
+    fig = px.pie(data, names='Status', title=f'Task Status Distribution for {project_id}')
 
     # Show the Pie Chart
     fig.show()  
